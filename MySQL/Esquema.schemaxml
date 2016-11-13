@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">maquinaria</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="cliente" view="colnames">
+<left>266</left>
+<top>29</top>
+<width>102</width>
+<height>192</height>
+<sql_create_table>CREATE TABLE `cliente` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `cedula` varchar(8) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `empresa` varchar(50) DEFAULT NULL,
+  `telefono` char(11) NOT NULL,
+  `correo` varchar(50) NOT NULL,
+  `direccion` varchar(250) NOT NULL,
+  `usuario` varchar(15) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `usuario` (`usuario`),
+  CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="usuario" view="colnames">
+<left>127</left>
+<top>142</top>
+<width>91</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `usuario` (
+  `usuario` varchar(15) NOT NULL,
+  `clave` varchar(15) NOT NULL,
+  `cod_nivel` int(11) NOT NULL,
+  PRIMARY KEY (`usuario`),
+  KEY `cod_nivel` (`cod_nivel`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`cod_nivel`) REFERENCES `nivel` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="nivel" view="colnames">
+<left>20</left>
+<top>231</top>
+<width>75</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `nivel` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nivel` varchar(15) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="tipo_maquinaria" view="colnames">
+<left>724</left>
+<top>529</top>
+<width>117</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `tipo_maquinaria` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(25) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="modelo_maquinaria" view="colnames">
+<left>525</left>
+<top>445</top>
+<width>155</width>
+<height>196</height>
+<sql_create_table>CREATE TABLE `modelo_maquinaria` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `modelo` varchar(250) NOT NULL,
+  `cod_tipo` int(11) NOT NULL,
+  `precio_alq` decimal(10,2) NOT NULL,
+  `precio_mora` decimal(10,2) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `foto` varchar(250) NOT NULL,
+  `precio_tras` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `cod_tipo` (`cod_tipo`),
+  CONSTRAINT `modelo_maquinaria_ibfk_1` FOREIGN KEY (`cod_tipo`) REFERENCES `tipo_maquinaria` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="maquinaria" view="colnames">
+<left>318</left>
+<top>372</top>
+<width>124</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `maquinaria` (
+  `placa` varchar(15) NOT NULL,
+  `cod_modelo` int(11) NOT NULL,
+  `estatus` varchar(15) NOT NULL,
+  PRIMARY KEY (`placa`),
+  KEY `cod_modelo` (`cod_modelo`),
+  CONSTRAINT `maquinaria_ibfk_1` FOREIGN KEY (`cod_modelo`) REFERENCES `modelo_maquinaria` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="solicitud" view="colnames">
+<left>408</left>
+<top>75</top>
+<width>113</width>
+<height>176</height>
+<sql_create_table>CREATE TABLE `solicitud` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(250) NOT NULL,
+  `cod_cliente` int(11) NOT NULL,
+  `direccion` varchar(250) NOT NULL,
+  `fecha` date NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `estatus` varchar(15) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `cod_cliente` (`cod_cliente`),
+  CONSTRAINT `solicitud_ibfk_1` FOREIGN KEY (`cod_cliente`) REFERENCES `cliente` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="solicitud_maquinaria" view="colnames">
+<left>563</left>
+<top>233</top>
+<width>145</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `solicitud_maquinaria` (
+  `cod_sol` int(11) NOT NULL,
+  `placa_maq` varchar(15) NOT NULL,
+  `precio_alq` decimal(10,2) NOT NULL,
+  `precio_mora` decimal(10,2) NOT NULL,
+  `dias` int(11) NOT NULL,
+  `precio_tras` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`cod_sol`,`placa_maq`),
+  KEY `placa_maq` (`placa_maq`),
+  CONSTRAINT `solicitud_maquinaria_ibfk_1` FOREIGN KEY (`cod_sol`) REFERENCES `solicitud` (`codigo`),
+  CONSTRAINT `solicitud_maquinaria_ibfk_2` FOREIGN KEY (`placa_maq`) REFERENCES `maquinaria` (`placa`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="pagos" view="colnames">
+<left>598</left>
+<top>29</top>
+<width>99</width>
+<height>142</height>
+<sql_create_table>CREATE TABLE `pagos` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_transaccion` varchar(30) NOT NULL,
+  `cod_sol` int(11) NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `cod_banco` int(11) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `cod_sol` (`cod_sol`),
+  KEY `cod_banco` (`cod_banco`),
+  CONSTRAINT `pagos_ibfk_1` FOREIGN KEY (`cod_sol`) REFERENCES `solicitud` (`codigo`),
+  CONSTRAINT `pagos_ibfk_2` FOREIGN KEY (`cod_banco`) REFERENCES `banco` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="banco" view="colnames">
+<left>779</left>
+<top>111</top>
+<width>75</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `banco` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `banco` varchar(50) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="solicitud_temp" view="colnames">
+<left>22</left>
+<top>504</top>
+<width>176</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `solicitud_temp` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_cliente` int(11) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `cod_cliente` (`cod_cliente`),
+  CONSTRAINT `solicitud_temp_ibfk_1` FOREIGN KEY (`cod_cliente`) REFERENCES `cliente` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="temporal_maquinaria" view="colnames">
+<left>268</left>
+<top>495</top>
+<width>146</width>
+<height>98</height>
+<sql_create_table>CREATE TABLE `temporal_maquinaria` (
+  `codigo_temp` int(11) NOT NULL,
+  `codigo_maq` int(11) NOT NULL,
+  PRIMARY KEY (`codigo_temp`,`codigo_maq`),
+  KEY `codigo_maq` (`codigo_maq`),
+  CONSTRAINT `temporal_maquinaria_ibfk_1` FOREIGN KEY (`codigo_temp`) REFERENCES `solicitud_temp` (`codigo`),
+  CONSTRAINT `temporal_maquinaria_ibfk_2` FOREIGN KEY (`codigo_maq`) REFERENCES `modelo_maquinaria` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

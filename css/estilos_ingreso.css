@@ -1,0 +1,25 @@
+#ingreso table{
+	margin: 0 auto;
+	color: #555;
+	font-weight: bold;
+}
+#ingreso p{
+	text-align: center;
+	color: #555;
+	margin-top: 25px;
+	font-weight: bold;
+}
+#ingreso a{
+	color: #04B486;
+}
+.caja{
+	margin-left: 2px;
+	margin-bottom: 5px;
+	border:solid;
+	color: #555;
+	border-radius: 3px;
+	padding: 5px;
+}
+.btn{
+	cursor: pointer;
+}

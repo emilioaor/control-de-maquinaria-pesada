@@ -1,0 +1,285 @@
+/* Panel principal del cliente */
+#menu{
+	width: 100%;
+	max-width: 1000px;
+	margin:0 auto;
+	text-align: center;
+}
+#menu .icono{
+	width: 20%;
+	text-align: center;
+	display: inline-block;
+	margin: 5px;
+	border-radius: 50%;
+	transition:transform 0.3s linear 0s;
+}
+#menu .icono:hover{
+	transform:scale(1.1,1.1);
+	box-shadow: 0px 0px 30px rgba(4,180,134,1);
+}
+#menu .icono a{
+	color: #04B486;
+	font-weight: bold;
+}
+#menu .icono img{
+	width: 100%;
+}
+
+@media screen and (max-width: 600px){
+	#menu .icono{
+		width: 40%;
+		margin-bottom: 10px;
+	}
+}
+
+
+/* Lista de Maquinaria */
+
+#lista-maquinaria{
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+#lista-maquinaria .maq{
+	width: 100%;
+	border:solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.7);
+	margin-bottom: 20px;
+}
+#lista-maquinaria .maq img{
+	box-sizin:border-box;
+	width: 25%;
+	float: left;
+	padding: 5px;
+	border-radius: 10px;
+}
+#lista-maquinaria .maq .iconos_pagos{
+	box-sizin:border-box;
+	width: 25%;
+	float: left;
+	padding: 5px;
+	border-radius: 10px;
+	max-width: 150px;
+}
+#lista-maquinaria .maq p{
+	box-sizin:border-box;
+	width: 50%;
+	float: left;
+	padding: 5px;
+}
+#lista-maquinaria .maq span{
+	font-weight: bold;
+}
+#espacio_btn{
+	width: 25%;
+	float: right;
+	text-align: center;
+	margin-top: -80px;
+}
+#espacio_btn3{
+	width: 25%;
+	float: right;
+	text-align: center;
+	margin-top: 0px;
+}
+#lista-maquinaria .maq button{
+	cursor: pointer;
+}
+#barra_maquinaria{
+	text-align: center;
+}
+.flotar{
+	width: 100%;
+	background-color: #FFF;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+	border-bottom: solid;
+	padding-top: 5px;
+}
+.clear{
+	clear: both;
+}
+
+#icono_flotante{
+	width: 30%;
+	max-width: 100px;
+	position: fixed;
+	left: 30px;
+	bottom: 30px;
+	background-color: #04B486;
+	border-radius: 50%;
+	padding: 10px;
+}
+#icono_flotante:hover{
+	transform:scale(1.1,1.1);
+}
+#icono_flotante img{
+	width: 100%;
+}
+#texto_flotante{
+	position: fixed;
+	left: 100px;
+	bottom: 90px;
+	background-color: red;
+	color: white;
+	border-radius: 5px;
+}
+#texto_flotante p{
+	display: inline-block;
+	text-align: center;
+	font-size: 50px;
+	border-radius: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#btn_quitar{
+	background-color: red;
+}
+
+#ayuda_flotante{
+	width: 30%;
+	max-width: 100px;
+	position: fixed;
+	left: 150px;
+	bottom: 120px;
+	background-color: #04B486;
+	border-radius: 10px;
+	padding: 10px;
+	display: none;
+}
+#ayuda_flotante p{
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+/* cliente soliciutd */
+
+#espacio_btn2{
+	width: 25%;
+	float: right;
+	text-align: center;
+	margin-top: -130px;
+	font-weight: bold;
+}
+
+#espacio_btn2 #p_btn2{
+	width: 100%;
+}
+#espacio_btn2 #p_btn3{
+	width: 100%;
+}
+#espacio_btn2 #p_btn4{
+	width: 100%;
+}
+
+.caja_peque{
+	width: 50px;
+	margin-left: 2px;
+	margin-bottom: 5px;
+	border:solid;
+	color: #555;
+	border-radius: 3px;
+	padding: 5px;
+}
+
+.div_centrar{
+	text-align: center;
+	width: 100%;
+}
+.div_centrar .form-aprobar{
+	width: 50%;
+	float: left;
+}
+.div_centrar #btn_generar{
+	width: 80%;
+	max-width: 200px;
+	padding: 20px;
+	font-size: 22px;
+}
+.div_centrar #btn_cancelar{
+	background-color: red;
+	width: 80%;
+	max-width: 200px;
+	padding: 20px;
+	font-size: 22px;
+}
+.div_centrar #btn_recibir{
+	background-color: green;
+	width: 80%;
+	max-width: 200px;
+	padding: 20px;
+	font-size: 22px;
+}
+
+/* Procesar pago */
+
+#cuentas_bancarias{
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+#cuentas_bancarias h3{
+	width: 100%;
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 5px;
+	float: left;
+}
+#cuentas_bancarias p{
+	width: 33%;
+	text-align: center;
+	float: left;
+	border-top: solid;
+	border-color: #999;
+	box-sizing:border-box;
+	padding: 10px;
+}
+#cuentas_bancarias span{
+	font-weight: bold;
+}
+.pagar{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.pagar #p_total{
+	float: right;
+	box-sizing:border-box;
+	padding: 10px;
+	font-size: 22px;
+}
+.pagar #p_total span{
+	font-weight: bold;
+}
+.pagar table{
+	font-weight: bold;
+}
+.pagar table h3{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/* cliente-ver-solicitud.php */
+
+#detalle_solicitud{
+	width: 100%;
+	margin-bottom: 30px;
+}
+#detalle_solicitud .pd1{
+	width: 100%;
+	text-align: right;
+}
+#detalle_solicitud .pd2{
+	width: 50%;
+	float: left;
+	margin-top: 30px;
+	box-sizing:border-box;
+	padding: 10px;
+}
+#detalle_solicitud span{
+	font-weight: bold;
+}
